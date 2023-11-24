@@ -49,7 +49,7 @@ repositories {
 nil {
     id "classicsavefixer"
     // Set this to false for a smaller JAR that can't be run as a standalone Java agent
-    standalone false
+    standalone true
 }
 
 dependencies {
