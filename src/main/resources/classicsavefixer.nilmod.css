@@ -1,0 +1,12 @@
+@nilmod {
+    /* There is no id field. The filename defines the id of the mod. */
+    name: "ClassicSaveFixer";
+    description: "A NilLoader mod that fixes Classic Minecraft's Load/Save dialogs.";
+    authors: "kneelawk";
+    version: "${version}";
+}
+
+entrypoints {
+    /* premain is the only entrypoint defined by NilLoader itself. */
+    premain: "com.kneelawk.classicsavefixer.ClassicSaveFixerPremain";
+}
