@@ -1,0 +1,35 @@
+# Publish a release
+
+name: publish
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+      - name: Setup JDK 17
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+      - name: Make Gradle Wrapper Executable
+        run: chmod +x ./gradlew
+      - name: Clean
+        run: ./gradlew clean
+      - name: Built Part 1
+        run: ./gradlew check
+      - name: Built Part 2
+        run: ./gradlew build
+      - name: Github Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/libs/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
